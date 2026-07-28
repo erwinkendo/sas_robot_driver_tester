@@ -1,0 +1,19 @@
+FROM murilomarinho/sas:jazzy
+LABEL authors="Erwin Lopez"
+
+ENV DEBIAN_FRONTEND=noninteractive
+# Change shell to bash
+SHELL ["/bin/bash", "-c"]
+
+# Default setup from original repos
+RUN sudo apt-get update && sudo apt-get upgrade -y
+RUN python3 -m pip install --upgrade dqrobotics --break-system-packages
+
+# Testing new branch repos
+RUN cd /root/ros2_ws/src && git clone https://github.com/MarinhoLab/sas_ur_control_template.git
+
+# Build and override packages
+RUN cd /root/ros2_ws && \
+    colcon build
+    
+RUN export FASTRTPS_DEFAULT_PROFILES_FILE=/root/ros2_ws/src/sas_ur_control_template/docker/scripts/fastrtps_profile.xml
