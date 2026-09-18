@@ -6,8 +6,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 SHELL ["/bin/bash", "-c"]
 
 # Default setup from original repos
-RUN sudo apt-get update && sudo apt-get upgrade -y
-RUN python3 -m pip install --upgrade dqrobotics --break-system-packages
+RUN sudo apt-get update && sudo apt-get upgrade -y && \
+    # sudo apt-get remove -y ros-jazzy-sas-robot-driver ros-jazzy-sas-core ros-jazzy-sas-robot-driver-ur && \
+    sudo dpkg --remove --force-depends ros-jazzy-sas-robot-driver ros-jazzy-sas-core ros-jazzy-sas-robot-driver-ur && \
+    python3 -m pip install --upgrade dqrobotics --break-system-packages
 
 # Testing new branch repos
 RUN cd /root/ros2_ws/src && git clone --recursive -b feature/tool_gpio https://github.com/erwinkendo/sas_core.git && \
@@ -16,8 +18,11 @@ RUN cd /root/ros2_ws/src && git clone --recursive -b feature/tool_gpio https://g
     git clone https://github.com/MarinhoLab/sas_ur_control_template.git
 
 COPY joint_interface_example.cpp /root/ros2_ws/src/sas_ur_control_template/src/joint_interface_example.cpp
+COPY config_tool_gpio.yaml /root/ros2_ws/src/sas_ur_control_template/config/config.yaml
+COPY robot_example_cpp_launch.py /root/ros2_ws/src/sas_ur_control_template/launch/robot_example_cpp_launch.py
+COPY robot_example_py_launch.py /root/ros2_ws/src/sas_ur_control_template/launch/robot_example_py_launch.py
 
-# Build and override packages
+# # Build and override packages
 RUN cd /root/ros2_ws && \
     colcon build --allow-overriding sas_core sas_robot_driver sas_robot_driver_ur
 
