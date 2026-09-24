@@ -99,11 +99,13 @@ int main(int argc, char** argv)
         VectorXd joints_increment = VectorXd::Zero(joint_positions.size());
         joints_increment(joint_to_move) = angle_increment;
 
+        auto joint_positions = rdi.get_joint_positions();
+        RCLCPP_INFO_STREAM(node->get_logger(),"joint positions = " << joint_positions);
+
         // Move the joints
         // auto target_joint_positions = joint_positions + VectorXd::Ones(joint_positions.size())*deg2rad(10.0 * sin(i / (50.0 * pi)));
-        auto target_joint_positions = joint_positions + joints_increment;
-        // print(target_joint_positions)
-        rdi.send_target_joint_positions(target_joint_positions);
+        // auto target_joint_positions = joint_positions + joints_increment;
+        // rdi.send_target_joint_positions(target_joint_positions);
 
         tool_counter++;
         if(tool_counter==tool_limit){

@@ -7,14 +7,14 @@ SHELL ["/bin/bash", "-c"]
 
 # Default setup from original repos
 RUN sudo apt-get update && sudo apt-get upgrade -y
-RUN python3 -m pip install --upgrade dqrobotics --break-system-packages
+RUN python3 -m pip install --upgrade dqrobotics marinholab-sas-core --break-system-packages
 
 # Testing new branch repos
 RUN cd /root/ros2_ws/src && git clone https://github.com/MarinhoLab/sas_ur_control_template.git
 
-COPY config_tool_gpio.yaml /root/ros2_ws/src/sas_ur_control_template/config/config.yaml
 COPY robot_example_cpp_launch.py /root/ros2_ws/src/sas_ur_control_template/launch/robot_example_cpp_launch.py
 COPY robot_example_py_launch.py /root/ros2_ws/src/sas_ur_control_template/launch/robot_example_py_launch.py
+COPY config_tool_gpio.yaml /root/ros2_ws/src/sas_ur_control_template/config/config.yaml
 
 # Build and override packages
 RUN cd /root/ros2_ws && \

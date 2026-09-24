@@ -14,3 +14,8 @@ docker compose -f compose_tool_gpio.yaml up --build --remove-orphans
 docker compose -f compose_tool_gpio.yaml stop -t 1 
 docker compose -f compose_tool_gpio.yaml rm 
 ```
+## Debugging
+
+``` bash
+docker compose -f XXX.yaml build --no-cache
+```

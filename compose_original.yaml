@@ -7,7 +7,7 @@ services:
     stop_grace_period: 1m
     network_mode: "host"
     environment:
-      - ROS_DOMAIN_ID
+      - ROS_DOMAIN_ID=17
     cap_add:
       - SYS_NICE # PREEMPT_RT
     ulimits:

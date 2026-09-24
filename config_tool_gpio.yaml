@@ -1,9 +1,9 @@
 ur3e:
   ros__parameters:
-    ip: '192.168.0.33'
-    script_file: '/opt/ros/jazzy/share/sas_robot_driver_ur/external_control.urscript'
-    output_recipe: '/opt/ros/jazzy/share/sas_robot_driver_ur/rtde_output_recipe.txt'
-    input_recipe: '/opt/ros/jazzy/share/sas_robot_driver_ur/rtde_input_recipe.txt'
+    ip: '192.170.10.13'
+    script_file: '/root/ros2_ws/install/sas_robot_driver_ur/share/sas_robot_driver_ur/external_control.urscript'
+    output_recipe: '/root/ros2_ws/install/sas_robot_driver_ur/share/sas_robot_driver_ur/rtde_output_recipe.txt'
+    input_recipe: '/root/ros2_ws/install/sas_robot_driver_ur/share/sas_robot_driver_ur/rtde_input_recipe.txt'
     calibration_checksum: 'calib_12788084448423163542'
     joint_limits_min: [-360.0, -360.0, -360.0, -360.0, -360.0, -720.0]  # The last joint has no limit
     joint_limits_max: [360.0, 360.0, 360.0, 360.0, 360.0, 720.0]  # The last joint has no limit
@@ -15,4 +15,4 @@ ur3e:
 # joint_interface_example_cpp (robot_example_cpp_launch.py)
 sas_ur_control_template_joint_interface_example:
   ros__parameters:
-    robot_topic_name: "AAA"
+    robot_topic_name: "ur3e"
